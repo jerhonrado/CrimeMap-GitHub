@@ -94,7 +94,6 @@ public class CrimeMap extends ActionBarActivity {
        items.add(new OverlayItem(getPoint(15.9761,
                                           120.5711),
                                 "Accident"));
-      populate();
     }
 
 }
