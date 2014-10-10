@@ -27,8 +27,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 public class CrimeMap extends ActionBarActivity {
-
-	LatLng Urdaneta = new LatLng(15.975802700000000000, 120.570693300000020000);
+LatLng Urdaneta = new LatLng(15.975802700000000000, 120.570693300000020000);
 	final String Application_ID = "w9A46lBqjtRMw9WnFkJgl2xdEsmgNGmPxXcWT4Iv";
 	final String Client_Key = "fD3SptdS3K6qMpzndXv3xzfnMsd14VUGNO7bgmvM";
 	GoogleMap map;
@@ -45,7 +44,7 @@ public class CrimeMap extends ActionBarActivity {
 		mClusterManager = new ClusterManager<MyItem>(this, map);
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(Urdaneta, 17.0F));
 		// LOAD ALL
-		Drawable marker=getResources().getDrawable(R.drawable.marker);
+
 		ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
 				"personName");
 		query.whereNotEqualTo("MarkerID", 0);
@@ -54,65 +53,154 @@ public class CrimeMap extends ActionBarActivity {
 			@Override
 			public void done(List<ParseObject> listahan, ParseException arg1) {
 				for (int i = 0; i < listahan.size(); i++) {
-
+					
+					double lat = listahan.get(i).getParseGeoPoint("LatLng")
+							.getLatitude();
+					
+					double lon = listahan.get(i).getParseGeoPoint("LatLng")
+							.getLongitude();
+					
 					switch (listahan.get(i).getNumber("MarkerID").intValue()) {
 
-					case 0:
-						double lat1 = listahan.get(i).getParseGeoPoint("LatLng")
-								.getLatitude();
-						double lon1 = listahan.get(i).getParseGeoPoint("LatLng")
-								.getLongitude();
-						LatLng location = new LatLng(lat1, lon1);
-						String ctitle = listahan.get(i).getString("CrimeTitle")
-								.toString();
-						String description = listahan.get(i)
-								.getString("Description").toString();
-						ParseFile marker1 = (ParseFile) listahan.get(i)
-								.getParseFile("Marker");
-						marker1.getDataInBackground(new GetDataCallback() {
-							@Override
-							public void done(byte[] data, ParseException e) {
-								Bitmap bitpic = BitmapFactory.decodeByteArray(
-										data, 0, data.length);
-								ByteArrayOutputStream stream = new ByteArrayOutputStream();
-								bitpic.compress(Bitmap.CompressFormat.PNG, 100,
-										stream);
-								// ImageView image=(ImageView)
-								// findViewById(R.id.imageView1);
-								// image.setImageBitmap(bitpic);
+					case 1:
 
-							}
-						});
-
-						// ADDING MARKER
-
-						Marker town = map.addMarker(new MarkerOptions()
-								.position(location).title(ctitle)
-								.snippet(description));
-
-						break;
-
-					default:
-						double lat = listahan.get(i)
-								.getParseGeoPoint("LatLng").getLatitude();
-						double lon = listahan.get(i)
-								.getParseGeoPoint("LatLng").getLongitude();
 						LatLng location1 = new LatLng(lat, lon);
 						String ctitle1 = listahan.get(i)
 								.getString("CrimeTitle").toString();
 						String description1 = listahan.get(i)
 								.getString("Description").toString();
-						
-						Marker town1 = map.addMarker(new MarkerOptions()
-								.position(location1).title(ctitle1)
-								.snippet( description1)
-								.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
+						// ADDING MARKER
 
+						Marker town = map.addMarker(new MarkerOptions()
+								.position(location1)
+								.title(ctitle1)
+								.snippet(description1)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.crimescene)));
+
+						break;
+					case 2:
+
+						LatLng location2 = new LatLng(lat, lon);
+						String ctitle2 = listahan.get(i)
+								.getString("CrimeTitle").toString();
+						String description2 = listahan.get(i)
+								.getString("Description").toString();
+						// ADDING MARKER
+
+						Marker town2 = map.addMarker(new MarkerOptions()
+								.position(location2)
+								.title(ctitle2)
+								.snippet(description2)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.bomb)));
+						break;
+					case 3:
+
+						LatLng location3 = new LatLng(lat, lon);
+						String ctitle3 = listahan.get(i)
+								.getString("CrimeTitle").toString();
+						String description3 = listahan.get(i)
+								.getString("Description").toString();
+						// ADDING MARKER
+
+						Marker town3 = map.addMarker(new MarkerOptions()
+								.position(location3)
+								.title(ctitle3)
+								.snippet(description3)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.robbery)));
+						break;
+					case 4:
+
+						LatLng location4 = new LatLng(lat, lon);
+						String ctitle4 = listahan.get(i)
+								.getString("CrimeTitle").toString();
+						String description4 = listahan.get(i)
+								.getString("Description").toString();
+						// ADDING MARKER
+
+						Marker town4 = map.addMarker(new MarkerOptions()
+								.position(location4)
+								.title(ctitle4)
+								.snippet(description4)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.fire)));
+						break;
+					case 5:
+
+						LatLng location5 = new LatLng(lat, lon);
+						String ctitle5 = listahan.get(i)
+								.getString("CrimeTitle").toString();
+						String description5 = listahan.get(i)
+								.getString("Description").toString();
+						// ADDING MARKER
+
+						Marker town5 = map.addMarker(new MarkerOptions()
+								.position(location5)
+								.title(ctitle5)
+								.snippet(description5)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.rape)));
+						break;
+
+					case 6:
+
+						LatLng location6 = new LatLng(lat, lon);
+						String ctitle6 = listahan.get(i)
+								.getString("CrimeTitle").toString();
+						String description6 = listahan.get(i)
+								.getString("Description").toString();
+						// ADDING MARKER
+
+						Marker town6 = map.addMarker(new MarkerOptions()
+								.position(location6)
+								.title(ctitle6)
+								.snippet(description6)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.abduction)));
+						break;
+
+					case 7:
+
+						LatLng location7 = new LatLng(lat, lon);
+						String ctitle7 = listahan.get(i)
+								.getString("CrimeTitle").toString();
+						String description7 = listahan.get(i)
+								.getString("Description").toString();
+						// ADDING MARKER
+
+						Marker town7 = map.addMarker(new MarkerOptions()
+								.position(location7)
+								.title(ctitle7)
+								.snippet(description7)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.torture)));
+						break;
+
+					default:
+						double lat0 = listahan.get(i)
+								.getParseGeoPoint("LatLng").getLatitude();
+						double lon0 = listahan.get(i)
+								.getParseGeoPoint("LatLng").getLongitude();
+						LatLng location0 = new LatLng(lat0, lon0);
+						String ctitle0 = listahan.get(i)
+								.getString("CrimeTitle").toString();
+						String description0 = listahan.get(i)
+								.getString("Description").toString();
+
+						Marker town0 = map.addMarker(new MarkerOptions()
+								.position(location0)
+								.title(ctitle0)
+								.snippet(description0)
+								.icon(BitmapDescriptorFactory
+										.fromResource(R.drawable.marker)));
 
 						MyItem item = new MyItem(lat, lon);
 						mClusterManager.addItem(item);
-						break;
 
+						break;
+					
 					}
 
 				}
@@ -127,6 +215,5 @@ public class CrimeMap extends ActionBarActivity {
 		 */
 
 	}
-
 }
 
